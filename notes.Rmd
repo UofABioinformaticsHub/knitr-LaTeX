@@ -1,0 +1,330 @@
+---
+title: "Introduction to LaTeX and knitr"
+author: "Steve Pederson"
+date: "26 August 2016"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## LaTeX
+
+### What is LaTex
+- LaTeX is a typesetting language
+- Brilliant for maths, managing references, tables, figures etc.
+
+### Two Key References
+- https://www.latex-project.org/
+- https://en.wikibooks.org/wiki/LaTeX
+
+## LaTeX | Installation
+
+- Installing can be time-consuming
+- For a basic installation:
+
+1. Clone this repo
+2. `cd path/to/knitr-LaTeX`
+2. `sudo texlive_install.sh`
+
+## LaTeX
+
+- We can edit TeX in any IDE, e.g. Texmaker, LyX, Atom, RStudio
+- It is not a WYSIWYG editor
+- Like markdown but fully featured
+    - Control line-spacing, figure size, captions, referencing
+    - Generate figures using code
+    - Change font sizing
+    - Auto generate TOC, Table of Figures, Table of Tables
+    - Comment out code (text, figures etc.)
+
+## LaTeX | Using knitr
+
+### Create a File
+- In R we use the `Sweave` file format: `Filename.Rnw`
+- Let's create one: `File > New File > R Sweave`
+- Save as `knitr-LaTeX-tutorial.Rnw`
+
+## LaTeX | The blank template
+- The `\documentclass{}` field has set document types
+    - `article`, `report`, `letter`, `book` 
+    - `beamer` (presentations)
+- We can specify the font size, paper size, orientation etc
+
+Set the font size and paper size using:
+```
+\documentclass[11pt,a4paper]{article}
+```
+
+## LaTeX | Basic Text Formatting
+
+We enclose a word in the text formatting we require:
+
+```
+These words will be in \textit{italics}, \textbf{bold}, 
+\texttt{true-type} and \underline{underlined}.
+```
+
+Enter this in your file after  `\begin{document}` then hit  
+`Compile PDF`
+
+## LaTeX | Compiling
+
+Numerous files were created during this stage
+
+- Errors will be in the log file
+- You can usually ignore the rest.
+
+## LaTeX | Basic Text Formatting
+
+New lines are created by finishing a line using either `\newline` or `\\`
+
+```
+These words will be in \textit{italics}, \textbf{bold}, \\
+\texttt{true-type} and \underline{underlined}.
+```
+
+(Recompile)
+
+## LaTeX | Basic Text Formatting
+
+We can increase the gap before the next line simply
+
+```
+These words will be in \textit{italics}, \textbf{bold}, \\[5mm]
+\texttt{true-type} and \underline{underlined}.
+```
+
+(Recompile)
+
+## LaTeX | Basic Text Formatting
+
+We can insert mathematical symbols and Greek letters in a sentence, using subscripts (_) and superscripts (^)
+
+```
+We are testing $H_0 : \sigma^2 \geq 1$
+```
+
+(Recompile)
+
+This done in text using `\textsubscript{}` and `\textsuperscript{}`.
+
+## LaTeX | Front Matter
+
+In reality, we'll usually need a header or title.
+
+- This usually goes directly after `\begin{document}`
+
+```
+\title{My First LaTeX Document}
+\author{Steve Pederson}
+\date{August 2016}
+\maketitle
+```
+
+## LaTeX | Front Matter
+
+You can get fancy in the header if you'd like
+
+```
+\title{My First LaTeX Document}
+\author{Steve Pederson\\
+University of Adelaide\\
+e: \texttt{email.me@wherever.com}}
+\date{August 2016}
+\maketitle
+```
+
+## LaTeX | Special Characters
+
+Several characters have special meaning:
+
+```
+# $ % ^ & _ { } ~ \
+```
+
+- We've already seen the \$ symbol to begin and start in-line maths
+- The comment character is %
+- All can be printed by escaping, except `\` 
+    - This is printed using `\textbackslash{}`
+
+## LaTeX | Special Characters
+
+Try entering these lines in your file
+
+```
+I'd like to hide the end of this %line
+This is 100\%
+```
+
+(Recompile)
+
+## LaTeX | Loading Packages
+
+- Extra functionality is added via `packages`
+
+Under `\documentclass{article}` add
+```
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+```
+
+Now we can use a huge range of mathematical symbols
+
+## LaTeX | Document Structure
+
+
+| Command | Level	| Comment |
+| ------- | ----- | ------- |
+| `\chapter{''chapter''}` | 0 | only books and reports |
+| `\section{''section''}` | 1 | not in letters |
+| `\subsection{''subsection''}` | 2 | not in letters |
+| `\subsubsection{''subsubsection''}` | 3 | not in letters |
+| `\paragraph{''paragraph''}` | 4 | not in letters |
+
+## LaTeX | Document Structure
+
+After `\maketitle` add
+
+```
+\section{Introduction}\label{sec:Intro}
+```
+
+- By adding the label we can refer to this at any point in the text
+
+(Recompile)
+
+## LaTeX | Referencing
+
+Now later on, add the text:
+
+```
+As seen in Section \ref{sec:Intro}, we're awesome
+```
+
+- We can reference anything we label, e.g. sections, figures, tables, equations
+- If we don't want the numbers at the headings, we can use `\section*{Introduction}`
+- We won't be able to use the referencing in the text though
+
+## LaTeX |Table of Contents
+
+If we use numbering, we can make a Table of Contents
+
+- After `\maketitle`, add
+
+```
+\tableofcontents
+```
+
+(Recompile)
+
+Other options are `\listoffigures` and `\listoftables`
+
+## LaTeX | Environments
+
+- LaTeX works using Environments
+- What we've done is create a large environment called a `document`
+- Environments are enclosed by `\begin{}` and `\end{}`
+- For online maths, we used the shortcut `$...$` to create one
+
+## LaTeX | Environments
+
+- Common environments are `itemize` and `enumerate`
+- There are actually shortcuts to these in RStudio
+
+`Hit the TeX Format icon and insert a Numbered List`
+
+- Every additional point needs to begin with `\item`
+
+```
+\begin{enumerate}
+  \item The first
+  \item The second
+\end{enumerate}
+```
+
+## LaTeX | Tables
+
+Tables usually go in a `tabular` environment
+
+```
+\begin{tabular}{llr}
+Day & Location & Total\\
+\hline 
+Monday & Adelaide & 5 \\
+Friday & Roseworthy & 10 \\
+\end{tabular}
+```
+
+## LaTeX | Tables
+
+If we want to number this and caption it
+
+```
+\begin{table}
+  \center
+  \caption{When, where \& how many}
+  \begin{tabular}{llr}
+  Day & Location & Total\\
+  \hline 
+  Monday & Adelaide & 5 \\
+  Friday & Roseworthy & 10 \\
+  \end{tabular}
+  \label{tab:Days}
+\end{table}
+```
+
+## LaTeX and knitr
+
+Code chunks work exactly the same as markdown except:
+
+- Chunks start with `<<chunkName, chunkOptions>>=`
+- Chunks end with `@`
+
+## Tables in RStudio
+
+```{r, eval = FALSE}
+library(xtable)
+xtable(Puromycin, 
+       caption = "The sample dataset for Puromycin",
+       label = "tab:Puro")
+```
+
+We need to set the chunk option `results = 'asis'`
+- I usually also set `echo = FALSE, include = TRUE`
+
+## Tables in RStudio
+
+For better formatting:
+
+```{r, eval = FALSE}
+library(magrittr)
+Puromycin %>%
+  xtable(caption = "The sample dataset for Puromycin",
+         label = "tab:Puro",
+         digits = c(0, 2, 0, 0)) %>%
+  print(include.rownames = FALSE,
+        caption.placement = "top")
+```
+
+Note I had to set digits to zero for the row names
+
+- They were only removed during the `print()` function
+
+## Figure in RStudio
+
+Chunks MUST be named to create figure labels
+
+- The following chunk would create a figure with the label `fig:barplot` (No line-breaks)
+- We can then refer to this in the body of text as well
+- The default unit is inches
+
+```
+<<barplot, echo = FALSE, include = TRUE, 
+           fig.width=5, fig.height=4, 
+           fig.cap = "A barplot">>=
+barplot(1:5)
+@
+```
