@@ -14,6 +14,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ### What is LaTex
 - LaTeX is a typesetting language
 - Brilliant for maths, managing references, tables, figures etc.
+- Main file format is `.tex`
+- Bibliographies are usually saved as `bibliography.bib`
 
 ### Two Key References
 - https://www.latex-project.org/
@@ -21,12 +23,16 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## LaTeX | Installation
 
-- Installing can be time-consuming
-- For a basic installation:
+Installation is big and slow
 
-1. Clone this repo
-2. `cd path/to/knitr-LaTeX`
-2. `sudo texlive_install.sh`
+```
+sudo apt-get install texlive-full
+```
+
+
+- Ubuntu: http://www.tug.org/texlive/doc/texlive-en/texlive-en.html
+- Mac: http://www.tug.org/mactex/  
+- Windows: http://miktex.org/howto/install-miktex
 
 ## LaTeX
 
