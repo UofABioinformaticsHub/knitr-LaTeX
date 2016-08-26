@@ -319,7 +319,7 @@ Note I had to set digits to zero for the row names
 
 - They were only removed during the `print()` function
 
-## Figure in RStudio
+## Figures in RStudio
 
 Chunks MUST be named to create figure labels
 
