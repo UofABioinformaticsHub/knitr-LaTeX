@@ -334,3 +334,13 @@ Chunks MUST be named to create figure labels
 barplot(1:5)
 @
 ```
+
+## Printing R Output Within Text
+
+To print the output of an R object in text:
+
+- Enclose in `\Sexpr{}` (Symbolic Expression), e.g.
+
+```
+Data was collected for \Sexpr{nrow(mtcars)} vehicles
+```
