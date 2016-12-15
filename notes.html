@@ -76,7 +76,6 @@
   </style>
 
 
-
 </head>
 
 <body style="opacity: 0">
@@ -181,6 +180,24 @@
 <ul>
 <li>Errors will be in the log file</li>
 <li>You can usually ignore the rest.</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>LaTeX </h2><h3> Compiling</h3></hgroup><article  id="latex-compiling-1">
+
+<p>This is all plain LaTeX</p>
+
+<p>We could enter this into a file <code>knitr-LaTeX-tutorial.tex</code> and compile using the bash command <code>pdflatex</code></p>
+
+<pre class = 'prettyprint lang-bash'>pdflatex knitr-LaTeX-tutorial.tex</pre>
+
+<p><code>Knitr</code> generates this file from <code>knitr-LaTeX-tutorial.Rnw</code><br/>\(\implies\) adds many commands that look confusing</p>
+
+</article></slide><slide class=''><hgroup><h2>LaTeX </h2><h3> Compiling</h3></hgroup><article  id="latex-compiling-2">
+
+<ul>
+<li><code>Texmaker</code> is my editor of choice</li>
+<li>Can also compile from <code>.Rnw</code> files in <code>Texmaker</code></li>
+<li>Command is <code>R CMD Sweave %.Rnw</code></li>
 </ul>
 
 </article></slide><slide class=''><hgroup><h2>LaTeX </h2><h3> Basic Text Formatting</h3></hgroup><article  id="latex-basic-text-formatting-1">
@@ -347,6 +364,63 @@ This is 100\%</pre>
 
 <p>Other options are <code>\listoffigures</code> and <code>\listoftables</code></p>
 
+</article></slide><slide class=''><hgroup><h2>LaTeX </h2><h3> Bibliography</h3></hgroup><article  id="latex-bibliography">
+
+<p>LaTeX uses <code>bibtex</code> format</p>
+
+<pre class = 'prettyprint lang-r'>citation(&quot;limma&quot;)</pre>
+
+<ol>
+<li>We copy this into a file called <code>Bibliography.bib</code></li>
+<li>Add a label (e.g. <code>limma2015</code>) after <code>@Article{</code> and before the first comma</li>
+</ol>
+
+</article></slide><slide class=''><hgroup><h2>LaTeX </h2><h3> Bibliography</h3></hgroup><article  id="latex-bibliography-1">
+
+<p>Now we need to load a bibliography package</p>
+
+<p>Before the <code>\begin{document}</code> command add:</p>
+
+<pre >\usepackage{natbib}</pre>
+
+<p>Now somewhere in your text add the line:</p>
+
+<pre >As we used the package limma (\cite{limma2015}), we need a bibliography.</pre>
+
+</article></slide><slide class=''><hgroup><h2>LaTeX </h2><h3> Bibliography</h3></hgroup><article  id="latex-bibliography-2">
+
+<p>To add the actual bibliography at the end:</p>
+
+<p>Just before the command <code>\end{document}</code> add</p>
+
+<pre >\clearpage
+
+\bibliographystyle{unsrtnat} 
+\bibliography{Bibliography} </pre>
+
+<p>(Recompile)</p>
+
+</article></slide><slide class=''><hgroup><h2>LaTeX </h2><h3> Bibliography</h3></hgroup><article  id="latex-bibliography-3">
+
+<p>If you prefer references as numbers, change the preamble to:</p>
+
+<pre >\usepackage[square, numbers, comma, sort&amp;compress]{natbib}</pre>
+
+<p>And the text to:</p>
+
+<pre >As we used the package limma\cite{limma2015}, we need a bibliography.</pre>
+
+</article></slide><slide class=''><hgroup><h2>LaTeX </h2><h3> Bibliography</h3></hgroup><article  id="latex-bibliography-4">
+
+<p>Adding this in <code>bash</code> requires:</p>
+
+<pre class = 'prettyprint lang-bash'>pdflatex knitr-LaTeX-tutorial.tex
+bibtex knitr-LaTeX-tutorial
+pdflatex knitr-LaTeX-tutorial.tex
+pdflatex knitr-LaTeX-tutorial.tex</pre>
+
+<p>In <code>Texmaker</code> on Ubuntu, you can set <code>Quick Build</code> to run this with one click</p>
+
 </article></slide><slide class=''><hgroup><h2>LaTeX </h2><h3> Environments</h3></hgroup><article  id="latex-environments">
 
 <ul>
@@ -398,12 +472,31 @@ Friday &amp; Roseworthy &amp; 10 \\
   Monday &amp; Adelaide &amp; 5 \\
   Friday &amp; Roseworthy &amp; 10 \\
   \end{tabular}
-  \label{tab:Days}
+  \label{tab:Collect}
 \end{table}</pre>
+
+</article></slide><slide class=''><hgroup><h2>LaTeX </h2><h3> Tables</h3></hgroup><article  id="latex-tables-2">
+
+<p>We use the label to refer to this in the text:</p>
+
+<pre >Check out Table `ref{tab:Collect}`</pre>
+
+</article></slide><slide class=''><hgroup><h2>LaTeX </h2><h3> Figures</h3></hgroup><article  id="latex-figures">
+
+<p>Here&#39;s a picture of a gull</p>
+
+<pre >\begin{figure}
+  \caption{A picture of a gull.}
+  \label{fig:gull}
+  \centering
+    \includegraphics[width=0.5\textwidth]{gull}
+\end{figure}</pre>
+
+<p>LaTeX prefers images as <code>.pdf</code> files: can also use <code>.png</code> and <code>jpg</code></p>
 
 </article></slide><slide class=''><hgroup><h2>LaTeX and knitr</h2></hgroup><article  id="latex-and-knitr">
 
-<p>Code chunks work exactly the same as markdown except:</p>
+<p>Code chunks work exactly the same as rmarkdown except:</p>
 
 <ul>
 <li>Chunks start with <code>&lt;&lt;chunkName, chunkOptions&gt;&gt;=</code></li>

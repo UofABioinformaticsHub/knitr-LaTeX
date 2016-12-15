@@ -8,3 +8,6 @@
 *.gz
 *.log
 *.Rnw
+*.bbl
+*.bib
+cache

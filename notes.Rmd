@@ -82,6 +82,25 @@ Numerous files were created during this stage
 - Errors will be in the log file
 - You can usually ignore the rest.
 
+## LaTeX | Compiling
+
+This is all plain LaTeX
+
+We could enter this into a file `knitr-LaTeX-tutorial.tex` and compile using the bash command `pdflatex`
+
+```{r, engine='bash',eval=FALSE}
+pdflatex knitr-LaTeX-tutorial.tex
+```
+
+`Knitr` generates this file from `knitr-LaTeX-tutorial.Rnw`  
+$\implies$ adds many commands that look confusing
+
+## LaTeX | Compiling
+
+- `Texmaker` is my editor of choice
+- Can also compile from `.Rnw` files in `Texmaker`
+- Command is `R CMD Sweave %.Rnw`
+
 ## LaTeX | Basic Text Formatting
 
 New lines are created by finishing a line using either `\newline` or `\\`
@@ -228,6 +247,77 @@ If we use numbering, we can make a Table of Contents
 
 Other options are `\listoffigures` and `\listoftables`
 
+## LaTeX | Bibliography
+
+LaTeX uses `bibtex` format
+
+```{r, eval=FALSE}
+citation("limma")
+```
+
+1. We copy this into a file called `Bibliography.bib`
+2. Add a label (e.g. `limma2015`) after `@Article{` and before the first comma
+
+## LaTeX | Bibliography
+
+Now we need to load a bibliography package
+
+Before the `\begin{document}` command add:
+
+```
+\usepackage{natbib}
+```
+
+Now somewhere in your text add the line:
+
+```
+As we used the package limma (\cite{limma2015}), we need a bibliography.
+```
+
+
+## LaTeX | Bibliography
+
+To add the actual bibliography at the end:
+
+Just before the command `\end{document}` add
+
+```
+\clearpage
+
+\bibliographystyle{unsrtnat} 
+\bibliography{Bibliography} 
+```
+
+(Recompile)
+
+## LaTeX | Bibliography
+
+If you prefer references as numbers, change the preamble to:
+
+```
+\usepackage[square, numbers, comma, sort&compress]{natbib}
+```
+
+And the text to:
+
+
+```
+As we used the package limma\cite{limma2015}, we need a bibliography.
+```
+
+## LaTeX | Bibliography
+
+Adding this in `bash` requires:
+
+```{r, engine='bash', eval=FALSE}
+pdflatex knitr-LaTeX-tutorial.tex
+bibtex knitr-LaTeX-tutorial
+pdflatex knitr-LaTeX-tutorial.tex
+pdflatex knitr-LaTeX-tutorial.tex
+```
+
+In `Texmaker` on Ubuntu, you can set `Quick Build` to run this with one click
+
 ## LaTeX | Environments
 
 - LaTeX works using Environments
@@ -278,13 +368,36 @@ If we want to number this and caption it
   Monday & Adelaide & 5 \\
   Friday & Roseworthy & 10 \\
   \end{tabular}
-  \label{tab:Days}
+  \label{tab:Collect}
 \end{table}
 ```
 
+## LaTeX | Tables
+
+We use the label to refer to this in the text:
+
+```
+Check out Table `ref{tab:Collect}`
+```
+
+## LaTeX | Figures
+
+Here's a picture of a gull
+
+```
+\begin{figure}
+  \caption{A picture of a gull.}
+  \label{fig:gull}
+  \centering
+    \includegraphics[width=0.5\textwidth]{gull}
+\end{figure}
+```
+
+LaTeX prefers images as `.pdf` files: can also use `.png` and `jpg`
+
 ## LaTeX and knitr
 
-Code chunks work exactly the same as markdown except:
+Code chunks work exactly the same as rmarkdown except:
 
 - Chunks start with `<<chunkName, chunkOptions>>=`
 - Chunks end with `@`
