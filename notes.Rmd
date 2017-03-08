@@ -11,8 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## LaTeX
 
-### What is LaTex
-- LaTeX is a typesetting language
+### What is $\LaTeX$
+- A typesetting language
 - Brilliant for maths, managing references, tables, figures etc.
 - Main file format is `.tex`
 - Bibliographies are usually saved as `bibliography.bib`
@@ -45,12 +45,20 @@ sudo apt-get install texlive-full
     - Auto generate TOC, Table of Figures, Table of Tables
     - Comment out code (text, figures etc.)
 
-## LaTeX | Using knitr
+## LaTeX | Using Texmaker
 
 ### Create a File
-- In R we use the `Sweave` file format: `Filename.Rnw`
-- Let's create one: `File > New File > R Sweave`
-- Save as `knitr-LaTeX-tutorial.Rnw`
+
+Go to the `File` menu and create a new file (or `Ctrl+N`), then:
+```
+\documentclass{article}
+
+\begin{document}
+
+\end{document}
+```
+
+This is a minimal document layout. (Save this as `myFile.tex`)
 
 ## LaTeX | The blank template
 - The `\documentclass{}` field has set document types
@@ -65,15 +73,16 @@ Set the font size and paper size using:
 
 ## LaTeX | Basic Text Formatting
 
-We enclose a word in the text formatting we require:
+- We just enter plain text between the `\begin{document}` and `\end{document}` commands
+- We can enclose a word in the text formatting we require:
 
 ```
 These words will be in \textit{italics}, \textbf{bold}, 
 \texttt{true-type} and \underline{underlined}.
 ```
 
-Enter this in your file after  `\begin{document}` then hit  
-`Compile PDF`
+- Enter this in your file after  `\begin{document}` then hit the arrow next to `PDFLaTeX`
+- View PDF...
 
 ## LaTeX | Compiling
 
@@ -81,25 +90,6 @@ Numerous files were created during this stage
 
 - Errors will be in the log file
 - You can usually ignore the rest.
-
-## LaTeX | Compiling
-
-This is all plain LaTeX
-
-We could enter this into a file `knitr-LaTeX-tutorial.tex` and compile using the bash command `pdflatex`
-
-```{r, engine='bash',eval=FALSE}
-pdflatex knitr-LaTeX-tutorial.tex
-```
-
-`Knitr` generates this file from `knitr-LaTeX-tutorial.Rnw`  
-$\implies$ adds many commands that look confusing
-
-## LaTeX | Compiling
-
-- `Texmaker` is my editor of choice
-- Can also compile from `.Rnw` files in `Texmaker`
-- Command is `R CMD Sweave %.Rnw`
 
 ## LaTeX | Basic Text Formatting
 
@@ -196,7 +186,7 @@ Under `\documentclass{article}` add
 \usepackage{amssymb}
 ```
 
-Now we can use a huge range of mathematical symbols
+Now we can use a huge range of mathematical fonts and symbols
 
 ## LaTeX | Document Structure
 
@@ -377,7 +367,7 @@ If we want to number this and caption it
 We use the label to refer to this in the text:
 
 ```
-Check out Table `ref{tab:Collect}`
+Check out Table \ref{tab:Collect}
 ```
 
 ## LaTeX | Figures
@@ -395,7 +385,36 @@ Here's a picture of a gull
 
 LaTeX prefers images as `.pdf` files: can also use `.png` and `jpg`
 
-## LaTeX and knitr
+# Integration with R/RStudio Using `knitr`
+
+## LaTeX | Using knitr
+
+### Create a File
+- In R we use the `Sweave` file format: `Filename.Rnw`
+- Let's create one: `File > New File > R Sweave`
+- Save as `knitr-LaTeX-tutorial.Rnw`
+- Enter some text (copy & paste)
+- Click `Compile PDF`
+
+## knitr | Compiling
+
+This is all still plain LaTeX
+
+We could enter this into a file `knitr-LaTeX-tutorial.tex` and compile using the bash command `pdflatex`
+
+```{r, engine='bash',eval=FALSE}
+pdflatex knitr-LaTeX-tutorial.tex
+```
+
+`Knitr` generates this file from `knitr-LaTeX-tutorial.Rnw`
+$\implies$ adds many commands that look confusing
+
+## knitr | Compiling
+
+- Can also compile from `.Rnw` files in `Texmaker`
+- Command is `R CMD Sweave %.Rnw`
+
+## knitr | Code Chunks
 
 Code chunks work exactly the same as rmarkdown except:
 

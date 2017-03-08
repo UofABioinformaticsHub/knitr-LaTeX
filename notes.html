@@ -94,10 +94,10 @@
 
 <slide class=''><hgroup><h2>LaTeX</h2></hgroup><article  id="latex">
 
-<h3>What is LaTex</h3>
+<h3>What is \(\LaTeX\)</h3>
 
 <ul>
-<li>LaTeX is a typesetting language</li>
+<li>A typesetting language</li>
 <li>Brilliant for maths, managing references, tables, figures etc.</li>
 <li>Main file format is <code>.tex</code></li>
 <li>Bibliographies are usually saved as <code>bibliography.bib</code></li>
@@ -138,15 +138,19 @@
 </ul></li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>LaTeX </h2><h3> Using knitr</h3></hgroup><article  id="latex-using-knitr">
+</article></slide><slide class=''><hgroup><h2>LaTeX </h2><h3> Using Texmaker</h3></hgroup><article  id="latex-using-texmaker">
 
 <h3>Create a File</h3>
 
-<ul>
-<li>In R we use the <code>Sweave</code> file format: <code>Filename.Rnw</code></li>
-<li>Let&#39;s create one: <code>File &gt; New File &gt; R Sweave</code></li>
-<li>Save as <code>knitr-LaTeX-tutorial.Rnw</code></li>
-</ul>
+<p>Go to the <code>File</code> menu and create a new file (or <code>Ctrl+N</code>), then:</p>
+
+<pre >\documentclass{article}
+
+\begin{document}
+
+\end{document}</pre>
+
+<p>This is a minimal document layout. (Save this as <code>myFile.tex</code>)</p>
 
 </article></slide><slide class=''><hgroup><h2>LaTeX </h2><h3> The blank template</h3></hgroup><article  id="latex-the-blank-template">
 
@@ -166,12 +170,18 @@
 
 </article></slide><slide class=''><hgroup><h2>LaTeX </h2><h3> Basic Text Formatting</h3></hgroup><article  id="latex-basic-text-formatting">
 
-<p>We enclose a word in the text formatting we require:</p>
+<ul>
+<li>We just enter plain text between the <code>\begin{document}</code> and <code>\end{document}</code> commands</li>
+<li>We can enclose a word in the text formatting we require:</li>
+</ul>
 
 <pre >These words will be in \textit{italics}, \textbf{bold}, 
 \texttt{true-type} and \underline{underlined}.</pre>
 
-<p>Enter this in your file after <code>\begin{document}</code> then hit<br/><code>Compile PDF</code></p>
+<ul>
+<li>Enter this in your file after <code>\begin{document}</code> then hit the arrow next to <code>PDFLaTeX</code></li>
+<li>View PDF&#8230;</li>
+</ul>
 
 </article></slide><slide class=''><hgroup><h2>LaTeX </h2><h3> Compiling</h3></hgroup><article  id="latex-compiling">
 
@@ -180,24 +190,6 @@
 <ul>
 <li>Errors will be in the log file</li>
 <li>You can usually ignore the rest.</li>
-</ul>
-
-</article></slide><slide class=''><hgroup><h2>LaTeX </h2><h3> Compiling</h3></hgroup><article  id="latex-compiling-1">
-
-<p>This is all plain LaTeX</p>
-
-<p>We could enter this into a file <code>knitr-LaTeX-tutorial.tex</code> and compile using the bash command <code>pdflatex</code></p>
-
-<pre class = 'prettyprint lang-bash'>pdflatex knitr-LaTeX-tutorial.tex</pre>
-
-<p><code>Knitr</code> generates this file from <code>knitr-LaTeX-tutorial.Rnw</code><br/>\(\implies\) adds many commands that look confusing</p>
-
-</article></slide><slide class=''><hgroup><h2>LaTeX </h2><h3> Compiling</h3></hgroup><article  id="latex-compiling-2">
-
-<ul>
-<li><code>Texmaker</code> is my editor of choice</li>
-<li>Can also compile from <code>.Rnw</code> files in <code>Texmaker</code></li>
-<li>Command is <code>R CMD Sweave %.Rnw</code></li>
 </ul>
 
 </article></slide><slide class=''><hgroup><h2>LaTeX </h2><h3> Basic Text Formatting</h3></hgroup><article  id="latex-basic-text-formatting-1">
@@ -289,7 +281,7 @@ This is 100\%</pre>
 \usepackage{amsfonts}
 \usepackage{amssymb}</pre>
 
-<p>Now we can use a huge range of mathematical symbols</p>
+<p>Now we can use a huge range of mathematical fonts and symbols</p>
 
 </article></slide><slide class=''><hgroup><h2>LaTeX </h2><h3> Document Structure</h3></hgroup><article  id="latex-document-structure">
 
@@ -479,7 +471,7 @@ Friday &amp; Roseworthy &amp; 10 \\
 
 <p>We use the label to refer to this in the text:</p>
 
-<pre >Check out Table `ref{tab:Collect}`</pre>
+<pre >Check out Table \ref{tab:Collect}</pre>
 
 </article></slide><slide class=''><hgroup><h2>LaTeX </h2><h3> Figures</h3></hgroup><article  id="latex-figures">
 
@@ -494,7 +486,38 @@ Friday &amp; Roseworthy &amp; 10 \\
 
 <p>LaTeX prefers images as <code>.pdf</code> files: can also use <code>.png</code> and <code>jpg</code></p>
 
-</article></slide><slide class=''><hgroup><h2>LaTeX and knitr</h2></hgroup><article  id="latex-and-knitr">
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Integration with R/RStudio Using <code>knitr</code></h2></hgroup><article  id="integration-with-rrstudio-using-knitr">
+
+</article></slide><slide class=''><hgroup><h2>LaTeX </h2><h3> Using knitr</h3></hgroup><article  id="latex-using-knitr">
+
+<h3>Create a File</h3>
+
+<ul>
+<li>In R we use the <code>Sweave</code> file format: <code>Filename.Rnw</code></li>
+<li>Let&#39;s create one: <code>File &gt; New File &gt; R Sweave</code></li>
+<li>Save as <code>knitr-LaTeX-tutorial.Rnw</code></li>
+<li>Enter some text (copy &amp; paste)</li>
+<li>Click <code>Compile PDF</code></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>knitr </h2><h3> Compiling</h3></hgroup><article  id="knitr-compiling">
+
+<p>This is all still plain LaTeX</p>
+
+<p>We could enter this into a file <code>knitr-LaTeX-tutorial.tex</code> and compile using the bash command <code>pdflatex</code></p>
+
+<pre class = 'prettyprint lang-bash'>pdflatex knitr-LaTeX-tutorial.tex</pre>
+
+<p><code>Knitr</code> generates this file from <code>knitr-LaTeX-tutorial.Rnw</code> \(\implies\) adds many commands that look confusing</p>
+
+</article></slide><slide class=''><hgroup><h2>knitr </h2><h3> Compiling</h3></hgroup><article  id="knitr-compiling-1">
+
+<ul>
+<li>Can also compile from <code>.Rnw</code> files in <code>Texmaker</code></li>
+<li>Command is <code>R CMD Sweave %.Rnw</code></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>knitr </h2><h3> Code Chunks</h3></hgroup><article  id="knitr-code-chunks">
 
 <p>Code chunks work exactly the same as rmarkdown except:</p>
 
